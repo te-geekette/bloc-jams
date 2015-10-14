@@ -30,6 +30,22 @@ var albumMarconi = {
      ]
 };
 
+// Album no. three
+var albumMinds = {
+     name: 'Notorious Minds',
+     artist: 'Master Minds',
+     label: 'Universal',
+     year: '2014',
+     albumArtUrl: 'assets/images/album_covers/17.png',
+     songs: [
+         { name: 'Close to being gone', length: '2:01' },
+         { name: 'Oh my goodness', length: '3:21' },
+         { name: 'Yeah, I don\'t like you either.', length: '3:21'},
+         { name: 'CBS', length: '3:14' },
+         { name: 'Yellow sub-what?', length: '2:15'}
+     ]
+};
+
 var createSongRow = function (songNumber, songName, songLength){
     var template = 
             '<tr class="album-view-song-item">'
@@ -60,6 +76,15 @@ var setCurrentAlbum = function(album) {
         albumSongList.innerHTML += createSongRow(i +1, album.songs[i].name, album.songs[i].length);
     }
 };
+
+var albumClick = document.getElementsByClassName('album-cover-art')[0];
+var albumList = [albumMarconi, albumMinds, albumPicasso];
+
+albumClick.addEventListener('click', function(event) {
+        setCurrentAlbum(albumList[0]);
+        var addAtEnd = albumList.shift();
+        albumList.push(addAtEnd);
+});
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
