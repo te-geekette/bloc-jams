@@ -61,19 +61,27 @@ var setCurrentAlbum = function(album) {
     }
 };
 
+
 var findParentByClassName = function(element, targetClass){
     if (element.parentElement){ 
         var currentParent = element.parentElement;    
-        while(currentParent.className != targetClass) {
-            if (currentParent) {
-                currentParent = currentParent.parentElement; 
-            }
+        while(currentParent.className && currentParent.className != targetClass) {
+            currentParent = currentParent.parentElement; 
+        }
+        if (currentParent.className == targetClass) {
+            return currentParent;
+        } else {
             alert ("No parent found with that class name");
         }
-        return currentParent;
-    }  
-    alert ("No parent found");
+    } else {  
+        alert ("No parent found");
+    }
 };
+
+// Problems of initial solution: The alert messages where not inside else blocks and therefore always called
+// Problem of 1. iteration (putting alerts inside else blocks): The else blocks were never reached, since the while loop always found a parent up to html and would then just exit
+// Problem with 2. iteration (added the check for the existence of currentParent outside the while loop: Seemed to work but proofed to be wrong since the currentPartent was still unrelated to the target class in some cases
+// Final solution: The while loop checks for the existance of a class (which is necessary because otherwise the while loop with throw an error when it reaches NULL) and if the class is equal to the target class. After the last parent is found the if block checks if that one has the targetClass and if not fires the alert. 
 
 var getSongItem = function(element){
     switch (element.className){
