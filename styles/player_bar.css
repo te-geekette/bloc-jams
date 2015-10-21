@@ -79,7 +79,8 @@
 
  .seek-control {
     position: relative;
-    font-size: 0.8rem;
+    font-size: 0.7em; 
+    font-weight: 300;
  }
  
  .seek-control .current-time {
